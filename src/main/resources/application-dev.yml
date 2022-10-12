@@ -1,0 +1,38 @@
+logging:
+  level:
+    root: debug
+server:
+  port: 9999
+spring:
+  jpa:
+    database: h2
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create
+    hibernate:
+      ddl-auto: create
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+  elasticsearch:
+    uris: http://localhost:9200
+
+# 时间分片的间隔时长
+intervalTimes: 300
+
+xxl:
+  job:
+    ### 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
+    admin:
+      addresses: http://192.168.11.85:8087/xxl-job-admin
+    executor:
+      appname: stdls-backend-distance
+      ### 执行器注册 [选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 ”IP:PORT“ 作为注册地址。从而更灵活的支持容器类型执行器动态IP和动态映射端口问题。
+      address:
+      ### 执行器IP [选填]：默认为空表示自动获取IP，多网卡时可手动设置指定IP，该IP不会绑定Host仅作为通讯实用；地址信息用于 "执行器注册" 和 "调度中心请求并触发任务"；
+      ip: 192.168.11.85
